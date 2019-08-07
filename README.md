@@ -3,12 +3,6 @@
 ## Welcome to `Reggora` gem!
 ### `Reggora` gem works for `Lender` and `Vendor` APIs supported by [Reggora](https://sandbox.reggora.io/).
 
-To experiment with that code, run `bin/console` for an interactive prompt.
-
-To use gem, run `gem install reggora`.
-
-As for a developer, if you want to install related ruby gems and build `reggora`, run `bin/setup`.
-
 ## Installation
 
 
