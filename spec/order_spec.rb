@@ -1,4 +1,3 @@
-require_relative '../lib/reggora/Entity/Lender/order'
 RSpec.describe Order do
 
   describe "Get All Orders" do

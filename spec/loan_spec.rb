@@ -1,4 +1,3 @@
-require_relative '../lib/reggora/Entity/Lender/loan'
 RSpec.describe Loan do
 
   describe "Get All Loans" do
@@ -31,7 +30,7 @@ RSpec.describe Loan do
     end
 
     it "returns http success" do
-      expect(@loan["status"]).to eq(200)
+      expect(@loan["stauts"]).to eq(200)
     end
 
     it "JSON body response has a Loan" do

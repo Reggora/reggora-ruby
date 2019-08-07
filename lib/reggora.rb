@@ -1,5 +1,7 @@
 # frozen_string_literal: true
-require 'reggora/Adapters/lender_api_client'
+require_relative 'reggora/Entity/Lender/loan'
+require_relative 'reggora/Entity/Lender/order'
+require_relative 'reggora/Adapters/lender_api_client'
 module Reggora
   # class Error < StandardError; end
 
