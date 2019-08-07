@@ -1,16 +1,18 @@
-class LenderApiClient < ApiClient
+require_relative 'api_client'
+require_relative 'requests'
+class LenderApiClient
 
   # @param [String] username
   # @param [String] password
   # @param [String] integration_token
   def initialize(username, password, integration_token)
     authorization = ApiClient.authenticate(username, password, 'lender')
-    @api_client = super(authorization["token"], integration_token, 'lender')
+    @api_client = Requests.new(authorization["token"], integration_token, 'lender')
+    $lender_api_client = self
   end
 
   # @param [string] username
   # @param [string] password
-  # @return [Hash] authentication token
   def self.authenticate(username, password)
     ApiClient.authenticate(username, password, 'lender')
   end
@@ -30,4 +32,5 @@ class LenderApiClient < ApiClient
   def delete(url)
     @api_client.delete(url)
   end
+
 end
