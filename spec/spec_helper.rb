@@ -1,8 +1,8 @@
 require "bundler/setup"
 require "reggora"
 
-require 'reggora/api_client'
-require 'reggora/lender_api_client'
+require 'reggora/Adapters/api_client'
+require 'reggora/Adapters/lender_api_client'
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = ".rspec_status"

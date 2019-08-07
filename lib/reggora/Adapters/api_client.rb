@@ -4,57 +4,62 @@ require 'json'
 class ApiClient
   $base_api_uri = 'https://sandbox.reggora.io/'
 
-  # @param [String] email
-  # @param [String] password
+  # @param [String] auth_token
   # @param [String] integration_token
-  #
+  # @param [String] type
+
   def initialize(auth_token, integration_token, type)
+    @uri = URI("#{$base_api_uri}#{type}")
     @http = Net::HTTP.new(@uri.host, @uri.port)
     @http.use_ssl = true
     @type = type
-    @header = {"Content-Type" => 'application/json', "Authorization" => auth_token, "integration" => integration_token}
+
+    @header = {"Content-Type" => 'application/json', "Authorization" => "Bearer #{auth_token}", "integration" => integration_token}
+    print "initializing #{type.upcase}...\n"
+    print "auth_token=>Bearer #{auth_token}\n"
+    print "URI=>#{@uri.to_s}\n"
+    print "Header=>#{@header.inspect}\n"
+    self
   end
 
-  # @param [string] email
+  # @param [string] username
   # @param [string] password
   # @param [string] type => lender/vendor
   # @return [Object]
-  def self.authenticate(email, password, type)
-    body = {:username => email, :password => password}
+  def self.authenticate(username, password, type)
+    body = {:username => username, :password => password}
 
     response = Net::HTTP.post URI("#{$base_api_uri}#{type}/auth"), body.to_json
     case response
     when Net::HTTPSuccess then
-      JSON.parse(res.read_body)
+      JSON.parse(response.read_body)
     else
-      print "\n~~~~~~~~HTTP NOT Succeeded~~~~~~~~~~~~~\n"
-      print response.inspect
       response.value
     end
   end
 
   def get(url, params = {})
-    @uri = URI($base_api_uri + url)
+    @uri = URI(@uri + url)
     @uri.query = URI.encode_www_form(params) unless params.empty?
     send_request Net::HTTP::Get.new(@uri.request_uri, @header)
   end
 
   def post(url, params = {})
-    @uri = URI($base_api_uri + url)
+    @uri = URI(@uri + url)
     request = Net::HTTP::Post.new(@uri, @header)
     request.body = params.to_json
     send_request request
   end
 
   def put(url, params = {})
-    @uri = URI($base_api_uri + url)
+    @uri = URI(@uri + url)
     request = Net::HTTP::Put.new(@uri, @header)
     request.body = params.to_json
     send_request request
   end
 
   def delete(url)
-    @uri = URI($base_api_uri + url)
+    @uri = URI(@uri + url)
     send_request Net::HTTP::Delete.new(@uri, @header)
   end
 
