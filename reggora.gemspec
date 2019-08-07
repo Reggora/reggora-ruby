@@ -34,6 +34,7 @@ Gem::Specification.new do |spec|
       "lib/reggora/Adapters/api_client.rb",
       "lib/reggora/Adapters/lender_api_client.rb",
       "lib/reggora/Entity/loan.rb",
+      "lib/reggora/Entity/order.rb"
   ]
   # spec.files = Dir.chdir(File.expand_path('..', __FILE__)) do
   #   `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/})}
