@@ -3,7 +3,10 @@ RSpec.describe Order do
   describe "Get All Orders" do
     before do
       query_params =  {
-
+          'offset': 0,
+          'ordering': '-created',
+          'loan_officer': '5b5b19d3c643b3000f8f2857',
+          'filter': 'rush, behind_schedule'
       }
       @orders = Order.new.all(query_params)
     end

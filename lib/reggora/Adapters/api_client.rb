@@ -1,6 +1,7 @@
 require 'uri'
 require 'net/http'
 require 'json'
+require 'mime/types'
 class ApiClient
   $base_api_uri = 'https://sandbox.reggora.io/'
 

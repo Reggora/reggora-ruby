@@ -35,7 +35,8 @@ Gem::Specification.new do |spec|
       "lib/reggora/Adapters/lender_api_client.rb",
       "lib/reggora/Adapters/requests.rb",
       "lib/reggora/Entity/Lender/loan.rb",
-      "lib/reggora/Entity/Lender/order.rb"
+      "lib/reggora/Entity/Lender/order.rb",
+      "lib/reggora/Entity/Lender/evault.rb",
   ]
   # spec.files = Dir.chdir(File.expand_path('..', __FILE__)) do
   #   `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/})}
@@ -47,4 +48,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler', '~> 1.17'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
+  spec.add_development_dependency 'mime-types', '~> 3.1'
 end
