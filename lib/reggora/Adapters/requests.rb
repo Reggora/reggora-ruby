@@ -16,8 +16,9 @@ class Requests
     send_request Net::HTTP::Get.new(api_endpoint.request_uri, @header)
   end
 
-  def post(url, params = {})
+  def post(url, params = {}, query_params = {})
     api_endpoint = full_uri url
+    api_endpoint.query = URI.encode_www_form(query_params) unless query_params.empty?
     request = Net::HTTP::Post.new(api_endpoint, @header)
     request.body = params.to_json
     send_request request
@@ -35,7 +36,7 @@ class Requests
     post_body << "--#{boundary}\r\n"
     post_body << "Content-Disposition: form-data; name=\"file\"; filename=\"#{ params[:file_name] || File.basename(file)}\"\r\n"
     post_body << "Content-Type: #{MIME::Types.type_for(file)}\r\n\r\n"
-    post_body << File.read(file)
+    post_body << File.open(file, 'rb') { |io| io.read }
 
     # Add the JSON
     post_body << "--#{boundary}\r\n"
@@ -71,13 +72,23 @@ class Requests
   def handle_response(response)
     case response
     when Net::HTTPSuccess then
-      JSON.parse(response.read_body)
+      json_parse(response.read_body)
     when Net::HTTPBadRequest then
-      raise JSON.parse(response.read_body).inspect
+      res = json_parse(response.read_body)
+      raise res.inspect if res["error"].nil?
+      res
     when Net::HTTPInternalServerError then
       raise "Internal server error"
     else
       raise "Unknown error #{response}: #{response.inspect}"
+    end
+  end
+
+  def json_parse(res)
+    begin
+      JSON.parse(res)
+    rescue JSON::ParserError
+      res
     end
   end
 end

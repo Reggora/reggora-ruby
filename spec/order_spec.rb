@@ -1,14 +1,21 @@
 RSpec.describe Order do
 
+  before do
+    @_order = Order.new
+    @_loan = Loan.new
+    @_product = Product.new
+    @model = 'order'
+    @test_loan = @_loan.create(@_loan.sample_data)
+    @test_product = @_product.create(@_product.sample_data)
+    @order_seed_data = @_order.sample_data(@test_loan["data"], @test_product["data"])[:auto_allocation_type]
+    test_order = @_order.create(@order_seed_data)
+    @test_order = @_order.find(test_order["data"])
+    @test_order_id = @test_order["data"][@model]["id"]
+  end
+
   describe "Get All Orders" do
     before do
-      query_params =  {
-          'offset': 0,
-          'ordering': '-created',
-          'loan_officer': '5b5b19d3c643b3000f8f2857',
-          'filter': 'rush, behind_schedule'
-      }
-      @orders = Order.new.all(query_params)
+      @orders = @_order.all
     end
 
     it "returns http success" do
@@ -16,14 +23,14 @@ RSpec.describe Order do
     end
 
     it "JSON body response has an Order at least" do
-      expect(@orders["data"]).not_to be_nil
+      expect(@orders["data"]["#{@model}s"]).not_to be_nil
     end
 
   end
 
   describe "Get an Order" do
     before do
-      @order = Order.new.find("5c2e718cb61f76001adf9871")
+      @order = @_order.find(@test_order_id)
     end
 
     it "returns http success" do
@@ -31,57 +38,21 @@ RSpec.describe Order do
     end
 
     it "JSON body response has an Order" do
-      expect(@order["data"]).not_to be_empty
+      expect(@order["data"][@model]).not_to be_empty
     end
 
     it "JSON body response contains expected Order attributes" do
-      expect(@order["data"].keys).to match_array(["id", "status", "priority", "due_date", "inspection_date", "accepted_vendor", "created", "allocation_mode", "requested_vendors", "inspection_complete", "products", "loan_file"])
+      order_attributes = %w(id status priority due_date evault inspection_date accepted_vendor created allocation_mode requested_vendors inspection_complete products loan_file)
+      expect(@order["data"][@model].keys).to match_array(order_attributes)
     end
   end
 
   describe "Create an Order" do
     before do
-      order_params_manually = {
-          'allocation_type': 'manually',
-          'vendors': [
-              '5b55d4c68d9472000fc432ef',
-              '5b55d4c68d9472000fc432eg',
-              '5b55d4c68d9472000fc432eh'
-          ],
-          'loan': '5d4b3683c92c89000cd8dc7c',
-          'priority': 'Rush',
-          'products': ['5b55d4c68d9472000fc432ef'],
-          'due_date': '2018-12-24 21:00:00',
-          'additional_fees': [
-              {
-                  'description': 'Large yard',
-                  'amount': '50'
-              },
-              {
-                  'description': 'Outside regular locations',
-                  'amount': '20'
-              }
-          ]
-
-      }
-      order_params_automatically = {
-          'allocation_type': 'automatically',
-          'loan': '5d4b3683c92c89000cd8dc7c',
-          'priority': 'Rush',
-          'products': ['5b55d4c68d9472000fc432ef'],
-          'due_date': '2018-12-24 21:00:00',
-          'additional_fees': [
-              {
-                  'description': 'Large yard',
-                  'amount': '50'
-              },
-              {
-                  'description': 'Outside regular locations',
-                  'amount': '20'
-              }
-          ]
-      }
-      @order = Order.new.create(order_params_manually)
+      test_loan = @_loan.create(@_loan.sample_data)
+      test_product = @_product.create(@_product.sample_data)
+      order_seed_data = @_order.sample_data(test_loan["data"], test_product["data"])[:auto_allocation_type]
+      @order = @_order.create(order_seed_data)
     end
 
     it "returns http success" do
@@ -96,25 +67,7 @@ RSpec.describe Order do
 
   describe "Edit an Order" do
     before do
-      order_params = {
-          'allocation_type': 'automatically',
-          'loan': '5d4b3683c92c89000cd8dc7c',
-          'priority': 'Rush',
-          'products': ["5b55d4c68d9472000fc432ef"],
-          'due_date': '2018-12-24 21:00:00',
-          'additional_fees': [
-              {
-                  'description': 'Large yard',
-                  'amount': '50'
-              },
-              {
-                  'description': 'Outside regular locations',
-                  'amount': '20'
-              }
-          ],
-          'refresh': false,
-      }
-      @order = Order.new.edit('5c2e718cb61f76001adf9871', order_params)
+      @order = @_order.edit(@test_order_id, @order_seed_data)
     end
 
     it "returns http success" do
@@ -125,23 +78,50 @@ RSpec.describe Order do
       expect(@order["data"]).not_to be_empty
     end
 
-    it "Due date was updated" do
-      @new_order = Order.new.find('5d4b3683c92c89000cd8dc7c')
-      expect(@new_order["data"]["due_date"]).not_to eq(Time.now.strftime("%Y-%m-%d %H:%M:%S"))
+    it "Due date should be updated" do
+      @updated_order = @_order.find(@order["data"])
+      expect(@updated_order["data"][@model]["id"]).to eq(@test_order_id)
+      expect(@updated_order["data"][@model]["due_date"]).not_to eq(@test_order["data"]["due_date"])
     end
 
   end
 
   describe "Cancel an Order" do
     before do
-      @response = Order.new.cancel("5c2e718cb61f76001adf9871")
+      @response = @_order.cancel(@test_order_id)
     end
 
     it "returns http success and has success message" do
       expect(@response["status"]).to eq(200)
       expect(@response).to have_key("data")
-      expect(@response["data"].downcase.strip).to include('canceled.')
     end
 
+    it "Cancelled order should have status 'Canceled'" do
+      @deleted_order = @_order.find(@test_order_id)
+      expect(@deleted_order["data"][@model]["status"].downcase).to eq("canceled")
+    end
+  end
+
+  describe "Place Order On Hold" do
+    before do
+      reason = 'I\'d like to wait to start this order.'
+      @response = @_order.place_on_hold(@test_order_id, reason)
+    end
+
+    it "returns http success and has success message" do
+      expect(@response["status"]).to eq(200)
+      expect(@response["data"]).not_to be_empty
+    end
+  end
+
+  describe "Remove Order HoldPlace Order On Hold" do
+    before do
+      @response = @_order.remove_from_hold(@test_order_id)
+    end
+
+    it "returns http success and has success message" do
+      expect(@response["status"]).to eq(200)
+      expect(@response["data"]).not_to be_empty
+    end
   end
 end

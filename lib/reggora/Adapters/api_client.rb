@@ -13,7 +13,7 @@ class ApiClient
     when Net::HTTPSuccess then
       JSON.parse(response.read_body)
     else
-      response.value
+      response
     end
   end
 end

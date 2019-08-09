@@ -21,8 +21,12 @@ class LenderApiClient
     @api_client.get(url, params)
   end
 
-  def post(url, params = {}, upload_file = false)
-    upload_file ? @api_client.post_file(url, params) : @api_client.post(url, params)
+  def post(url, params = {}, query_params = {})
+    @api_client.post(url, params, query_params)
+  end
+
+  def post_file(url, params = {})
+    @api_client.post_file(url, params)
   end
 
   def put(url, params = {})

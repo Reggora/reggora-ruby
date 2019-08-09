@@ -20,7 +20,16 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: For the moment, will leave blank here.
+- Initializing Library
+
+  `Reggora::Lender.new(user_name, password, integration_token)`
+  
+- Make request
+
+  `@_user = User.new`
+  
+  `@_user.find(user_id)`
+
 
 ## Development
 
