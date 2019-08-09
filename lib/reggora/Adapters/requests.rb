@@ -55,9 +55,11 @@ class Requests
     send_request request
   end
 
-  def delete(url)
+  def delete(url, params = {})
     api_endpoint = full_uri url
-    send_request Net::HTTP::Delete.new(api_endpoint, @header)
+    request = Net::HTTP::Delete.new(api_endpoint, @header)
+    request.body = params.to_json
+    send_request request
   end
 
   def send_request(request)

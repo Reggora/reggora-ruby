@@ -33,8 +33,8 @@ class LenderApiClient
     @api_client.put(url, params)
   end
 
-  def delete(url)
-    @api_client.delete(url)
+  def delete(url, params =  {})
+    @api_client.delete(url, params)
   end
 
 end

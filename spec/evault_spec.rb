@@ -80,7 +80,7 @@ RSpec.describe Evault do
   describe "Delete a Document" do
     before do
       document_params = {
-          'id': '524523ff2d2d223d23',
+          'id': '5d4d06d6d28c2600109499c5',
           'document_id': '00a1eb9e-ba6a-11e9-b584-0242ac120002',
       }
       @response = @_evault.delete_document(document_params)
