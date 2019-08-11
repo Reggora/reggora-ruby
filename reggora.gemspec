@@ -6,12 +6,12 @@ require 'reggora/version'
 Gem::Specification.new do |spec|
   spec.name          = 'reggora'
   spec.version       = Reggora::VERSION
-  spec.authors       = ['fatpig']
-  spec.email         = ['fatpig0416@gmail.com']
+  spec.authors       = ['reggora']
+  spec.email         = ['development@reggora.com']
 
-  spec.summary       = 'Library for Reggora Lender/Vendor API'
-  spec.description   = 'This library makes request to https://sandbox.reggora.io/'
-  spec.homepage      = 'https://rubygems.org/gems/raggora'
+  spec.summary       = 'Ruby Client for Reggora Lender/Vendor API'
+  spec.description   = 'https://sandbox.reggora.io/'
+  spec.homepage      = 'https://rubygems.org/gems/reggora'
   spec.license       = 'MIT'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -20,8 +20,8 @@ Gem::Specification.new do |spec|
     spec.metadata['allowed_push_host'] = 'https://rubygems.org/gems/'
 
     spec.metadata['homepage_uri'] = spec.homepage
-    spec.metadata['source_code_uri'] = 'https://github.com/0x15f/reggora-ruby'
-    spec.metadata['changelog_uri'] = 'https://github.com/0x15f/reggora-ruby/blob/master/CHANGELOG.md'
+    spec.metadata['source_code_uri'] = 'https://github.com/Reggora/reggora-ruby'
+    spec.metadata['changelog_uri'] = 'https://github.com/Reggora/reggora-ruby/blob/master/CHANGELOG.md'
   else
     raise 'RubyGems 2.0 or newer is required to protect against ' \
       'public gem pushes.'
