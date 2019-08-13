@@ -1,37 +1,38 @@
 class User
-  def initialize
+  def initialize(client)
     @model = 'user'
+    @client = client
   end
 
   # returns a list of all the users in the requesting lender.
   def all(params = {})
-    $lender_api_client.get("/#{@model}s", params)
+    @client.get("/#{@model}s", params)
   end
 
   # takes a user ID as a URL parameter and returns a user object.
   def find(user_id)
-    $lender_api_client.get("/#{@model}s/#{user_id}")
+    @client.get("/#{@model}s/#{user_id}")
   end
 
   # invites a user to the reggora platform
   def invite(email, role, firstname, lastname, phone_number)
     invite_params = invite_params(email, role, firstname, lastname, phone_number)
-    $lender_api_client.post("/#{@model}s/invite", invite_params)
+    @client.post("/#{@model}s/invite", invite_params)
   end
 
   # creates a user to the reggora platform.
   def create(user_params)
-    $lender_api_client.post("/#{@model}s", user_params)
+    @client.post("/#{@model}s", user_params)
   end
 
   # updates a user's information.
   # No fields are required and only the supplied fields will be updated on the user.
   def edit(user_id, user_params)
-    $lender_api_client.put("/#{@model}s/#{user_id}", user_params)
+    @client.put("/#{@model}s/#{user_id}", user_params)
   end
 
   def delete(user_id)
-    $lender_api_client.delete("/#{@model}s/#{user_id}")
+    @client.delete("/#{@model}s/#{user_id}")
   end
 
   def user_attributes(email, role, firstname, lastname, phone_number, branch_id = '', nmls_id = '', matched_users = [])

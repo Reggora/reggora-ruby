@@ -5,6 +5,7 @@ set -vx
 
 bundle install
 gem build reggora.gemspec
+gem uninstall reggora
 gem install reggora
 
 

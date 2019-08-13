@@ -12,8 +12,16 @@ class ApiClient
     case response
     when Net::HTTPSuccess then
       JSON.parse(response.read_body)
+    when Net::HTTPBadRequest then
+      res = JSON.parse(response.read_body)
+      raise res.inspect if res["error"].nil?
+      print res
+    when Net::HTTPUnauthorized then
+      raise "Unauthorized."
+    when Net::HTTPInternalServerError then
+      raise "Internal server error"
     else
-      response
+      raise "Unknown error #{response}: #{response.inspect}"
     end
   end
 end

@@ -1,29 +1,30 @@
 class Product
-  def initialize
+  def initialize(client)
     @model = 'product'
+    @client = client
   end
   # retrieves all products.
   def all(params = {})
-    $lender_api_client.get("/#{@model}s", params)
+    @client.get("/#{@model}s", params)
   end
 
   # retrieves a specific product by id.
   def find(id)
-    $lender_api_client.get("/#{@model}/#{id}")
+    @client.get("/#{@model}/#{id}")
   end
 
   # creates a product and returns the ID of the created product.
   def create(product_params)
-    $lender_api_client.post("/#{@model}", product_params)
+    @client.post("/#{@model}", product_params)
   end
 
   # edits a product and returns the ID of the edited product.
   def edit(id, product_params)
-    $lender_api_client.put("/#{@model}/#{id}", product_params)
+    @client.put("/#{@model}/#{id}", product_params)
   end
   # deletes a specific product. If an order or a loan is associated with this product the reference will not be broken.
   def delete(id)
-    $lender_api_client.delete("/#{@model}/#{id}")
+    @client.delete("/#{@model}/#{id}")
   end
 
   def sample_data

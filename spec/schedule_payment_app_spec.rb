@@ -1,10 +1,10 @@
 RSpec.describe SchedulePaymentApp do
   before do
-    @_app = SchedulePaymentApp.new
-    @_order = Order.new
+    @_app = SchedulePaymentApp.new($lender_api_client)
+    @_order = Order.new($lender_api_client)
 
-    @_loan = Loan.new
-    @_product = Product.new
+    @_loan = Loan.new($lender_api_client)
+    @_product = Product.new($lender_api_client)
 
     @test_loan = @_loan.create(@_loan.sample_data)
     @test_product = @_product.create(@_product.sample_data)
@@ -48,7 +48,7 @@ RSpec.describe SchedulePaymentApp do
     before do
       consumer_id = 'eb402ec3-0bf4-465d-b95e-8bce612ad2be'
       link_type = 'both' # payment/schedule/both
-      @res = @_app.consumer_app_link(@order["data"], consumer_id, link_type)
+      @res = @_app.consumer_app_link('5d4c72c79d5c4b000e607ab8', consumer_id, link_type)
     end
 
     it "returns http success" do

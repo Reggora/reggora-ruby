@@ -32,7 +32,6 @@ Gem::Specification.new do |spec|
   spec.files = [
       "lib/reggora.rb",
       "lib/reggora/Adapters/api_client.rb",
-      "lib/reggora/Adapters/lender_api_client.rb",
       "lib/reggora/Adapters/requests.rb",
       "lib/reggora/Entity/Lender/loan.rb",
       "lib/reggora/Entity/Lender/order.rb",
@@ -51,7 +50,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_development_dependency 'bundler', '~> 1.17'
+  spec.add_development_dependency 'mime-types', '~> 3.1'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
-  spec.add_development_dependency 'mime-types', '~> 3.1'
 end

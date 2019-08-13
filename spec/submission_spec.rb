@@ -1,10 +1,10 @@
 RSpec.describe Submission do
   before do
-    @_submission = Submission.new
+    @_submission = Submission.new($lender_api_client)
     @model = 'submission'
-    @_order = Order.new
-    @_loan = Loan.new
-    @_product = Product.new
+    @_order = Order.new($lender_api_client)
+    @_loan = Loan.new($lender_api_client)
+    @_product = Product.new($lender_api_client)
 
     @test_loan = @_loan.create(@_loan.sample_data)
     @test_product = @_product.create(@_product.sample_data)
@@ -35,7 +35,7 @@ RSpec.describe Submission do
     end
 
     it "returns http success" do
-      expect(@submission["status"]).to eq(200)
+      expect(@submission["error"]).to be_empty
     end
 
   end

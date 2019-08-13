@@ -1,9 +1,9 @@
 RSpec.describe Order do
 
   before do
-    @_order = Order.new
-    @_loan = Loan.new
-    @_product = Product.new
+    @_order = Order.new($lender_api_client)
+    @_loan = Loan.new($lender_api_client)
+    @_product = Product.new($lender_api_client)
     @model = 'order'
     @test_loan = @_loan.create(@_loan.sample_data)
     @test_product = @_product.create(@_product.sample_data)

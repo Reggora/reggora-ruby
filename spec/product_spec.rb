@@ -1,6 +1,6 @@
 RSpec.describe Product do
   before do
-    @_product = Product.new
+    @_product = Product.new($lender_api_client)
     @model = 'product'
 
     @test_product = @_product.create(@_product.sample_data)

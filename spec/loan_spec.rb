@@ -1,7 +1,7 @@
 RSpec.describe Loan do
 
   before do
-    @_loan = Loan.new
+    @_loan = Loan.new($lender_api_client)
     @model = 'loan'
   end
 

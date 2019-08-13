@@ -1,6 +1,6 @@
 RSpec.describe Vendor do
   before do
-    @_vendor = Vendor.new
+    @_vendor = Vendor.new($lender_api_client)
     @model = 'vendor'
     @vendors = @_vendor.all
     @test_vendor = @_vendor.find(@vendors["data"]["#{@model}s"].first["id"])

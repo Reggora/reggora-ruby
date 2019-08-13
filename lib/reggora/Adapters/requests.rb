@@ -26,26 +26,25 @@ class Requests
 
   def post_file(url, params)
     api_endpoint = full_uri url
-    boundary = "AaB03x"
-    header = {"Content-Type" => "multipart/form-data, boundary=#{boundary}", "Authorization" => "Bearer #{@header['Authorization']}", "integration" => @header['integration']}
-    # We're going to compile all the parts of the body into an array, then join them into one single string
-    # This method reads the given file into memory all at once, thus it might not work well for large files
-    post_body = []
-    file = params[:file]
-    # Add the file Data
-    post_body << "--#{boundary}\r\n"
-    post_body << "Content-Disposition: form-data; name=\"file\"; filename=\"#{ params[:file_name] || File.basename(file)}\"\r\n"
-    post_body << "Content-Type: #{MIME::Types.type_for(file)}\r\n\r\n"
-    post_body << File.open(file, 'rb') { |io| io.read }
+    header = @header.dup
+    boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW"
+    header["Content-Type"] = "multipart/form-data; boundary=#{boundary}"
 
-    # Add the JSON
-    post_body << "--#{boundary}\r\n"
-    post_body << "Content-Disposition: form-data; name=\"id\"\r\n\r\n"
-    post_body << params[:id]
-    post_body << "\r\n\r\n--#{boundary}--\r\n"
     request = Net::HTTP::Post.new(api_endpoint, header)
-    request.body = post_body.to_json
+    request.body = ""
+    params.each do |k, v|
+      if k.to_s == 'file'
+        mime_type = MIME::Types.type_for(v)
+        request.body += "--#{boundary}\r\nContent-Disposition: form-data; name=\"#{k.to_s}\"; filename=\"#{v}\"\r\nContent-Type: #{mime_type[0]}\r\n"
+      else
+        request.body += "--#{boundary}\r\nContent-Disposition: form-data; name=\"#{k.to_s}\"\r\n\r\n#{v}\r\n"
+      end
+    end
+
+    request.body += "\r\n\r\n--#{boundary}--"
+
     send_request request
+
   end
 
   def put(url, params = {})
@@ -72,6 +71,9 @@ class Requests
   end
 
   def handle_response(response)
+    print "\n------ Response -----\n"
+    puts response.read_body
+    print "---------------------------"
     case response
     when Net::HTTPSuccess then
       json_parse(response.read_body)
@@ -79,6 +81,8 @@ class Requests
       res = json_parse(response.read_body)
       raise res.inspect if res["error"].nil?
       res
+    when Net::HTTPUnauthorized then
+      raise "Unauthorized."
     when Net::HTTPInternalServerError then
       raise "Internal server error"
     else

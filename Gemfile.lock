@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    reggora (1.0.0)
+    reggora (2.0.0)
 
 GEM
   remote: https://rubygems.org/
