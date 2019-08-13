@@ -22,7 +22,7 @@ Or install it yourself as:
 
 - Initializing Library
 
-  `@lender_api_client = Reggora::LenderApiClient.new($user_name, $password, $int_token)`
+  `@lender_api_client = Reggora::LenderApiClient.new(user_name, password, int_token)`
   
 - Make request
 
