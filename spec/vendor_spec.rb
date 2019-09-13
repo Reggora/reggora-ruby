@@ -1,6 +1,6 @@
-RSpec.describe Vendor do
+RSpec.describe Reggora::Vendor do
   before do
-    @_vendor = Vendor.new($lender_api_client)
+    @_vendor = Reggora::Vendor.new($lender_api_client)
     @model = 'vendor'
     @vendors = @_vendor.all
     @test_vendor = @_vendor.find(@vendors["data"]["#{@model}s"].first["id"])
