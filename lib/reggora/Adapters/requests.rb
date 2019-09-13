@@ -1,3 +1,4 @@
+require 'mime/types'
 module Reggora
   class Requests
     def initialize(auth_token, integration_token, type)
