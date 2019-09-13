@@ -1,6 +1,6 @@
-RSpec.describe Product do
+RSpec.describe Reggora::Product do
   before do
-    @_product = Product.new($lender_api_client)
+    @_product = Reggora::Product.new($lender_api_client)
     @model = 'product'
 
     @test_product = @_product.create(@_product.sample_data)

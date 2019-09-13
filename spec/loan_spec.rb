@@ -1,7 +1,7 @@
-RSpec.describe Loan do
+RSpec.describe Reggora::Loan do
 
   before do
-    @_loan = Loan.new($lender_api_client)
+    @_loan = Reggora::Loan.new($lender_api_client)
     @model = 'loan'
   end
 

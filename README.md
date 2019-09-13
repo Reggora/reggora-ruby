@@ -23,11 +23,11 @@ Or install it yourself as:
 - Initializing Library
 
   `@lender_api_client = Reggora::LenderApiClient.new(user_name, password, int_token)`
-  
+
 - Make request
 
-  `@_user = User.new(@lender_api_client)`
-  
+  `@_user = Reggora::User.new(@lender_api_client)`
+
   `@_user.find(user_id)`
 
 

@@ -1,35 +1,37 @@
-class SchedulePaymentApp
-  def initialize(client)
-    @client = client
-  end
+module Reggora
+  class SchedulePaymentApp
+    def initialize(client)
+      @client = client
+    end
 
-  def send_payment_app(consumer_email, order_id, user_type, payment_type, amount, firstname = '', lastname = '')
-    payment_params = payment_attributes(consumer_email, order_id, user_type, payment_type, amount, firstname, lastname)
-    @client.post('/consumer/payment', payment_params)
-  end
+    def send_payment_app(consumer_email, order_id, user_type, payment_type, amount, firstname = '', lastname = '')
+      payment_params = payment_attributes(consumer_email, order_id, user_type, payment_type, amount, firstname, lastname)
+      @client.post('/consumer/payment', payment_params)
+    end
 
-  def send_scheduling_app(consumer_emails, order_id)
-    @client.post("/consumer/scheduling", {consumer_emails: consumer_emails, order_id: order_id})
-  end
+    def send_scheduling_app(consumer_emails, order_id)
+      @client.post("/consumer/scheduling", {consumer_emails: consumer_emails, order_id: order_id})
+    end
 
-  # @param [String] order_id
-  # @param [String] link_type : payment/schedule/both
-  # @param [String] consumer_id
-  def consumer_app_link(order_id, consumer_id, link_type)
-    @client.get("/#{order_id}/#{consumer_id}/#{link_type}")
-  end
+    # @param [String] order_id
+    # @param [String] link_type : payment/schedule/both
+    # @param [String] consumer_id
+    def consumer_app_link(order_id, consumer_id, link_type)
+      @client.get("/#{order_id}/#{consumer_id}/#{link_type}")
+    end
 
-  def payment_attributes(consumer_email, order_id, user_type, payment_type, amount, firstname = '', lastname = '')
+    def payment_attributes(consumer_email, order_id, user_type, payment_type, amount, firstname = '', lastname = '')
 
-    attributes = {
-        consumer_email: consumer_email,
-        order_id: order_id,
-        user_type: user_type,
-        payment_type: payment_type,
-        amount: amount
-    }
+      attributes = {
+          consumer_email: consumer_email,
+          order_id: order_id,
+          user_type: user_type,
+          payment_type: payment_type,
+          amount: amount
+      }
 
-    attributes.merge!({firstname: firstname, lastname: lastname, paid: false}) if user_type == 'manual'
-    attributes
+      attributes.merge!({firstname: firstname, lastname: lastname, paid: false}) if user_type == 'manual'
+      attributes
+    end
   end
 end

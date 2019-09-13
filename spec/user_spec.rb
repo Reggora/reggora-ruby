@@ -1,6 +1,6 @@
-RSpec.describe User do
+RSpec.describe Reggora::User do
   before do
-    @_user = User.new($lender_api_client)
+    @_user = Reggora::User.new($lender_api_client)
     @model = 'user'
     @test_user = @_user.create(@_user.sample_data)
     @test_user_id = @test_user["data"]

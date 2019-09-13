@@ -1,7 +1,7 @@
-RSpec.describe Evault do
+RSpec.describe Reggora::Evault do
 
   before do
-    @_evault = Evault.new($lender_api_client)
+    @_evault = Reggora::Evault.new($lender_api_client)
     @model = 'evault'
     @test_order_id = "5d4d06d6d28c2600109499c5"
     @file = "#{File.expand_path(File.dirname(__FILE__))}/files/sample.pdf"
