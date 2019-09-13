@@ -23,6 +23,7 @@ RSpec.describe Reggora::Submission do
     end
 
     it "JSON body response has a Submission at least" do
+      #TODO WAIT UNTIL VENDOR WRAPPER TO UPLOAD SUBMISSIONS
       # expect(@submissions["data"]["#{@model}s"]).not_to be_empty
     end
   end
@@ -35,6 +36,7 @@ RSpec.describe Reggora::Submission do
     end
 
     it "returns http success" do
+      #TODO WAIT UNTIL VENDOR WRAPPER TO UPLOAD SUBMISSIONS
       # expect(@submission["error"]).to be_empty
     end
 
