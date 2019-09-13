@@ -44,7 +44,6 @@ module Reggora
       end
 
       request.body += "\r\n\r\n--#{boundary}--"
-
       send_request request
 
     end

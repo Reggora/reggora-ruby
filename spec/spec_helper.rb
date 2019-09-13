@@ -1,9 +1,9 @@
 require "bundler/setup"
 require "reggora"
-
-$user_name = 'jake@reggora.com'
-$password = 'reggora123'
-$int_token = '906414c6-29f3-4c96-8deb-bbc2f4616275'
+require "pry"
+$user_name = 'max@reggora.com'
+$password = 'test123'
+$int_token = 'test-api-key'
 
 $lender_api_client = Reggora::LenderApiClient.new($user_name, $password, $int_token)
 

@@ -7,6 +7,7 @@ RSpec.describe Reggora::Order do
     @model = 'order'
     @test_loan = @_loan.create(@_loan.sample_data)
     @test_product = @_product.create(@_product.sample_data)
+    # binding.pry
     @order_seed_data = @_order.sample_data(@test_loan["data"], @test_product["data"])[:auto_allocation_type]
     test_order = @_order.create(@order_seed_data)
     @test_order = @_order.find(test_order["data"])
@@ -15,6 +16,7 @@ RSpec.describe Reggora::Order do
 
   describe "Get All Orders" do
     before do
+      # binding.pry
       @orders = @_order.all
     end
 
@@ -30,6 +32,7 @@ RSpec.describe Reggora::Order do
 
   describe "Get an Order" do
     before do
+      # binding.pry
       @order = @_order.find(@test_order_id)
     end
 
@@ -49,6 +52,7 @@ RSpec.describe Reggora::Order do
 
   describe "Create an Order" do
     before do
+      # binding.pry
       test_loan = @_loan.create(@_loan.sample_data)
       test_product = @_product.create(@_product.sample_data)
       order_seed_data = @_order.sample_data(test_loan["data"], test_product["data"])[:auto_allocation_type]
@@ -67,6 +71,7 @@ RSpec.describe Reggora::Order do
 
   describe "Edit an Order" do
     before do
+      # binding.pry
       @order = @_order.edit(@test_order_id, @order_seed_data)
     end
 
@@ -88,6 +93,7 @@ RSpec.describe Reggora::Order do
 
   describe "Cancel an Order" do
     before do
+      # binding.pry
       @response = @_order.cancel(@test_order_id)
     end
 
@@ -104,6 +110,7 @@ RSpec.describe Reggora::Order do
 
   describe "Place Order On Hold" do
     before do
+      # binding.pry
       reason = 'I\'d like to wait to start this order.'
       @response = @_order.place_on_hold(@test_order_id, reason)
     end
@@ -116,6 +123,7 @@ RSpec.describe Reggora::Order do
 
   describe "Remove Order HoldPlace Order On Hold" do
     before do
+      # binding.pry
       @response = @_order.remove_from_hold(@test_order_id)
     end
 

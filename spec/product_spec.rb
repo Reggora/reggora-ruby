@@ -2,7 +2,7 @@ RSpec.describe Reggora::Product do
   before do
     @_product = Reggora::Product.new($lender_api_client)
     @model = 'product'
-
+    # binding.pry
     @test_product = @_product.create(@_product.sample_data)
     @test_product_id = @test_product["data"]
   end
@@ -35,7 +35,7 @@ RSpec.describe Reggora::Product do
     end
 
     it "JSON body response contains expected Loan attributes" do
-      product_attributes = %w(id product_name amount inspection_type requested_forms)
+      product_attributes = %w(id product_name amount inspection_type requested_forms geographic_overrides_list)
       expect(@product["data"][@model].keys).to match_array(product_attributes)
     end
   end

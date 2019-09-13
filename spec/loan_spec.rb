@@ -59,7 +59,8 @@ RSpec.describe Reggora::Loan do
     before do
       @loan_for_test = @_loan.create(@_loan.sample_data)
       @test_loan = @_loan.find(@loan_for_test["data"])
-      @loan = @_loan.edit(@test_loan["data"][@model]["id"], {"case_number": "10030MA"})
+      @loan_num = @test_loan["data"]["loan"]["loan_number"]
+      @loan = @_loan.edit(@test_loan["data"][@model]["id"], {"loan_number": @loan_num, "case_number": "10030MA"})
     end
 
     it "returns http success" do
