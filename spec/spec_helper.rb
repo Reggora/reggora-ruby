@@ -1,9 +1,16 @@
 require "bundler/setup"
 require "reggora"
+require 'dotenv/load'
+require 'pry'
 
-$user_name = 'max@reggora.com'
-$password = 'test123'
-$int_token = 'test-api-key'
+$user_name = ENV['USER_NAME']
+$password = ENV['USER_PASSWORD']
+$int_token = ENV['INT_TOKEN']
+
+if $user_name == nil && $password == nil && $int_token == nil
+  raise "Please provide creditials on the .ENV file."
+end 
+
 
 $lender_api_client = Reggora::LenderApiClient.new($user_name, $password, $int_token)
 
