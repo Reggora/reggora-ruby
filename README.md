@@ -40,6 +40,28 @@ After checking out the repo, run `bin/setup` to install dependencies. Then, run 
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
+## Running Tests
+
+**You must add your credentials to the .env file inside the root folder. If there isn't one please make one and add the following ENV variables:**
+
+```
+USER_NAME=example@email.com
+PASS_WORD=example_pass123
+INT_TOKEN=integration-api-token-here
+```
+
+To run tests run:
+
+```
+rake spec
+```
+
+To run an individual test run:
+
+```
+rspec spec/<name_of_file>/rb
+```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/Reggora/reggora-ruby. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
