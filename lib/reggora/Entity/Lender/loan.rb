@@ -33,7 +33,7 @@ module Reggora
       s = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
       {
         "loan_number": "#{3 * n}#{s[1...5]}#{n}",
-        "loan_officer": "",
+        "loan_officer": "5d4c4afdcfd7ff000a515085",
         "appraisal_type": "Refinance",
         "due_date": (Time.now + 60*60*24*30).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "subject_property_address": "100 Mass Ave",
