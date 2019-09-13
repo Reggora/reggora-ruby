@@ -2,7 +2,7 @@ RSpec.describe Reggora::Product do
   before do
     @_product = Reggora::Product.new($lender_api_client)
     @model = 'product'
-    # binding.pry
+    
     @test_product = @_product.create(@_product.sample_data)
     @test_product_id = @test_product["data"]
   end

@@ -1,6 +1,6 @@
 require "bundler/setup"
 require "reggora"
-require "pry"
+
 $user_name = 'max@reggora.com'
 $password = 'test123'
 $int_token = 'test-api-key'
