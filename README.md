@@ -3,6 +3,9 @@
 ## Welcome to `Reggora` gem!
 ### `Reggora` gem works for `Lender` and `Vendor` APIs supported by [Reggora](https://sandbox.reggora.io/).
 
+![ruby_ver](https://img.shields.io/badge/Requires-Ruby%202.4%2B-red)
+![curr_ver](https://img.shields.io/badge/Version-2.1.0-blue)
+
 ## Installation
 
 
