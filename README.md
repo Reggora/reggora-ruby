@@ -42,10 +42,10 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 Bug reports and pull requests are welcome on GitHub at https://github.com/Reggora/reggora-ruby. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## Contributors
-|Contributor| Author |
-|:--:| :--: |
-|[![dansteren_pic](https://avatars1.githubusercontent.com/u/5455419?s=120&v=4)](https://github.com/dansteren) | [![jinguohao1991_pic](https://avatars3.githubusercontent.com/u/31640360?s=120&v=4)](https://github.com/jinguohao1991)|
-|[@dansteren](https://github.com/dansteren)<br>[@Simple Nexus](https://github.com/SimpleNexus)| [@jinguohao1991](https://github.com/jinguohao1991)|
+|Contributor|
+| :--: |
+|[![dansteren_pic](https://avatars1.githubusercontent.com/u/5455419?s=120&v=4)](https://github.com/dansteren) |
+|[@dansteren](https://github.com/dansteren)<br>[@Simple Nexus](https://github.com/SimpleNexus)|
 
 
 ## License
