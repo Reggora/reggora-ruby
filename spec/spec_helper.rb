@@ -1,7 +1,6 @@
 require "bundler/setup"
 require "reggora"
 require 'dotenv/load'
-require 'pry'
 
 $user_name = ENV['USER_NAME']
 $password = ENV['USER_PASSWORD']
