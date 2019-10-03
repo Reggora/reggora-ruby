@@ -34,6 +34,7 @@ Gem::Specification.new do |spec|
       "lib/reggora/Adapters/api_client.rb",
       "lib/reggora/Adapters/requests.rb",
       "lib/reggora/Entity/Lender/loan.rb",
+      "lib/reggora/Entity/Lender/conversation.rb",
       "lib/reggora/Entity/Lender/order.rb",
       "lib/reggora/Entity/Lender/evault.rb",
       "lib/reggora/Entity/Lender/product.rb",

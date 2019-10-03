@@ -39,7 +39,7 @@ module Reggora
       @client.put("/order/#{order_id}/unhold")
     end
 
-    def sample_data(loan_id, product_id)
+    def sample_data(loan_id, product_id, vendors)
       order_params_manually = {
           'allocation_type': 'manually',
           'loan': loan_id,
@@ -55,7 +55,8 @@ module Reggora
                   'description': 'Outside regular locations',
                   'amount': '20'
               }
-          ]
+          ],
+          'vendors': vendors
       }
       order_params_automatically = {
           'allocation_type': 'automatically',
