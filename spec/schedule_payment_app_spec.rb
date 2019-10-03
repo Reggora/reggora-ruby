@@ -23,7 +23,6 @@ RSpec.describe Reggora::SchedulePaymentApp do
     end
 
     it "JSON body response has a success message" do
-      print @res["data"]
       expect(@res["data"]).not_to be_nil
     end
   end
@@ -39,7 +38,6 @@ RSpec.describe Reggora::SchedulePaymentApp do
     end
 
     it "JSON body response has a success message" do
-      print @res["data"]
       expect(@res["data"]).not_to be_nil
     end
   end
@@ -56,7 +54,6 @@ RSpec.describe Reggora::SchedulePaymentApp do
     end
 
     it "JSON body response has a App Link" do
-      print @res
       expect(@res).not_to be_nil
       expect(@res).to include('http')
     end

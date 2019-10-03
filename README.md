@@ -46,7 +46,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ```
 USER_NAME=example@email.com
-PASS_WORD=example_pass123
+USER_PASS=example_pass123
 INT_TOKEN=integration-api-token-here
 ```
 
