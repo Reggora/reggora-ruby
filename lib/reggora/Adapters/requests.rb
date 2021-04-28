@@ -73,7 +73,11 @@ module Reggora
 
     def handle_response(response)
       print "\n------ Response -----\n"
-      puts response.read_body
+      begin
+        puts response.read_body
+      rescue
+        puts "Error printing response body"
+      end
       print "---------------------------"
       case response
       when Net::HTTPSuccess then
