@@ -3,7 +3,7 @@ require 'net/http'
 require 'json'
 module Reggora
   class ApiClient
-    $base_api_uri = 'https://sandbox.reggora.io/'
+    $base_api_uri = 'https://api.reggora.io/'
 
     def self.authenticate(username, password, type)
       body = {:username => username, :password => password}
